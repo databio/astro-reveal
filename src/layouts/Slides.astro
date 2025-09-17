@@ -1,0 +1,51 @@
+---
+import 'reveal.js/dist/reset.css';
+import 'reveal.js/dist/reveal.css';
+import 'reveal.js/dist/theme/black.css';
+import 'reveal.js/plugin/highlight/monokai.css';
+import "../assets/theme.css"
+import Layout from "./Layout.astro";
+
+export interface Props {
+    title: "string;"
+    authors: string[];
+    description?: string;
+	titleSlide?: boolean;
+}
+
+const { title, authors, description } = Astro.props;
+console.log(Astro.props);
+console.log("Title:", title);
+console.log(authors);
+console.log(description);
+---
+
+<Layout title={title}>
+	<Fragment slot="head">
+	  {description && <meta name="description" content={description} />}
+	  {authors?.map((author) => <meta name="author" content={author} />)}
+	</Fragment>
+  
+	<div class="reveal">
+		<div class="slides"><slot /></div>
+	</div>
+	test
+  </Layout>
+  
+  <script>
+	import Reveal from 'reveal.js';
+	import RevealMarkdown from 'reveal.js/plugin/markdown/markdown.esm.js';
+	import RevealHighlight from 'reveal.js/plugin/highlight/highlight.esm.js';
+	import RevealNotes from 'reveal.js/plugin/notes/notes.esm.js';
+	import RevealMath from 'reveal.js/plugin/math/math.esm.js';
+
+	let deck = new Reveal({
+					hash: true,
+					center: false,  // No vertical centering
+					disableLayout: false,
+					transition: 'fade',
+					transitionSpeed: 'fast',
+					plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath]
+				});
+	deck.initialize();
+  </script>

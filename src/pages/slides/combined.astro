@@ -1,0 +1,23 @@
+---
+import { getRebasedEntry } from '../../utils/getRebasedEntry';
+import MarkdownSlides from '../../layouts/MarkdownSlides.astro';
+
+// getRebasedEntry is a drop-in replacement for getEntry that rewrites 
+// relative links to work from this combined location
+const noodles = await getRebasedEntry('slides', 'noodles');
+const popcorn = await getRebasedEntry('slides', 'popcorn');
+---
+
+<MarkdownSlides
+  title="Combined Presentation"
+  authors={["Henrique Ramos"]}
+  description="Do you even flex?">
+
+
+<Fragment set:html={noodles?.body}/>
+---
+<Fragment set:html={popcorn?.body}/>
+
+
+
+</MarkdownSlides>

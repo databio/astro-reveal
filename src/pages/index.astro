@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+// The `slides` collection is defined in `src/content/config.ts`
+// and contains all the slideshows (markdown files) in the `/slides` directory.
+const presentations = await getCollection('slides');
+---
+
+<Layout title="Presentations">
+  <h1>Astro-reveal.js slide repository demo</h1>
+
+  <p>Here are the presentations available:</p>
+  <p>Click on the title to see the slides.</p>
+
+  <h2>Some one-off example presentations</h2>
+  <ul>
+  <li><a href="/slides/combined/">Combined Presentation</a></li>
+  <li><a href="/examples/basic/">Basic Example</a></li>
+  <li><a href="/slides/supplemented/">Supplemented Example</a></li>
+  <li><a href="/slides/import/">Import Example</a></li>
+  </ul>
+
+  <h2>Presentations listed as an astro collection:</h2>
+  <ul>
+    {presentations.map((presentation) => (
+
+      <li><a href={`/slides/${presentation.id}/`}>{presentation.data.title}</a> -- {presentation.data.description}</li>
+    ))}
+  </ul>
+</Layout> 

@@ -1,0 +1,30 @@
+---
+import { getRebasedEntry } from '../../utils/getRebasedEntry';
+import MarkdownSlides from '../../layouts/MarkdownSlides.astro';
+const noodles = await getRebasedEntry('slides', 'noodles');
+console.log("frontmatter:", noodles.frontmatter);
+console.log("rawMarkdown:", noodles.body);
+---
+
+<MarkdownSlides
+  title="Combined Presentation"
+  authors={["Henrique Ramos"]}
+  description="Do you even flex?">
+
+
+<Fragment set:html={noodles.body}/>
+---
+# Supplemental slide 1 
+
+This slide is not imported from one of the markdown files.
+---
+
+<h2>Supplemental slide 2</h2>
+
+You can also embed HTML here:
+
+<span class="fragment">fragment 1</span>
+<span class="fragment">fragment 2</span>
+
+
+</MarkdownSlides>

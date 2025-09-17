@@ -1,0 +1,17 @@
+---
+import MarkdownSlides from '../../layouts/MarkdownSlides.astro';
+import { rebaseMarkdownImages } from '../../utils/rebaseMarkdownImages';
+import * as slides from '../../../public/slides/noodles/noodles.md';
+
+// This shows you how to do a direct import of a specific slideshow
+
+const frontmatter = slides.frontmatter;
+const rawMarkdown = await slides.rawContent();
+const rebasedMarkdown = rebaseMarkdownImages(rawMarkdown, '/slides/noodles');
+---
+
+<MarkdownSlides title={frontmatter.title} authors={frontmatter.authors} description={frontmatter.description}>
+
+<Fragment set:html={rebasedMarkdown}></Fragment>
+
+</MarkdownSlides>

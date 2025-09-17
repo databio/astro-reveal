@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import MarkdownSlides from '../../layouts/MarkdownSlides.astro';
+
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const presentations = await getCollection('slides');
+  console.log("get static paths:", presentations);
+  return presentations.map(presentation => ({
+    params: { id: presentation.id , title: presentation.data.title },
+    props: { presentation },
+  }));
+}
+
+// 2. For your template, you can get the entry directly from the prop
+const { presentation } = Astro.props;
+
+---
+
+<MarkdownSlides
+  title={presentation.data.title}
+  authors={presentation.data.authors}
+  description={presentation.data.description}
+  titleSlide={presentation.data.titleSlide}
+>
+<Fragment set:html={presentation.body}/>
+</MarkdownSlides>

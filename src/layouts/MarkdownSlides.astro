@@ -1,0 +1,29 @@
+---
+export interface Props {
+    title: "string;"
+    authors: string[];
+    description?: string;
+    titleSlide?: boolean;
+}
+import Slides from "./Slides.astro";
+
+
+const { title, authors, description, titleSlide } = Astro.props;
+const slotContent = await Astro.slots.render('default');
+// console.log("Slot content:", slotContent);
+console.log("Title--:", title);
+console.log("Title Slide--:", titleSlide);
+---
+
+<Slides title={title}>
+<section data-markdown>
+<textarea data-template>
+
+{ titleSlide ? "# " + title + "\n\n---\n\n": ""}
+
+{slotContent}
+
+</textarea>
+</section>
+</Slides>
+  

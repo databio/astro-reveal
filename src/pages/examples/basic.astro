@@ -1,0 +1,29 @@
+---
+import Slides from '../../layouts/Slides.astro';
+
+export const title = "Karaoke";
+export const authors = ["Oscar"];
+export const publishedAt = "2025-01-27";
+export const description = "A talk about karaoke";
+export const draft = true;
+---
+
+
+<Slides title={title} authors={authors} description={description}>
+	<div class="reveal">
+		<div class="slides">
+		  <section data-markdown>
+			<textarea data-template>
+## Karaoke 1
+A paragraph with some text and a [link](https://hakim.se).
+---
+## Karaoke 2
+Second slide
+
+---
+## Karaoke 3
+			</textarea>
+		  </section>
+		</div>
+	  </div>
+</Slides>
